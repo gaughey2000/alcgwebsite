@@ -23,7 +23,7 @@
         </div>
         <nav id="site-nav">
           <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
-            Menu
+            Menu <span class="nav-icon" aria-hidden="true"></span>
           </button>
           <ul id="primary-nav">
             <li><a href="index.html">Home</a></li>
@@ -148,9 +148,19 @@
     <script>
       const nav = document.getElementById("site-nav");
       const toggle = nav.querySelector(".nav-toggle");
+      const links = nav.querySelectorAll("a");
       toggle.addEventListener("click", () => {
         const isOpen = nav.classList.toggle("nav-open");
         toggle.setAttribute("aria-expanded", String(isOpen));
+      });
+      links.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (!nav.classList.contains("nav-open")) {
+            return;
+          }
+          nav.classList.remove("nav-open");
+          toggle.setAttribute("aria-expanded", "false");
+        });
       });
     </script>
   </body>
